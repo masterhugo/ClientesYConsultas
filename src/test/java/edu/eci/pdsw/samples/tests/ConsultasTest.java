@@ -19,24 +19,43 @@ package edu.eci.pdsw.samples.tests;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import edu.eci.pdsw.samples.entities.*;
+import edu.eci.pdsw.samples.managedbeans.*;
+import edu.eci.pdsw.samples.services.*;
+import java.sql.*;
+import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author hcadavid
  */
 public class ConsultasTest {
-    
-    public ConsultasTest() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @Test
-    public void registroPacienteTest(){
-        
-    }
-    
-    
+  /**
+   * Clases de Equivalencia
+   * Que consulte bien
+   * Que el id no exista pero si existe el Tipo de id
+   * Que el id exista pero no existe el Tipo de id
+   * Que ninguno de los dos exista
+   * Que el id sea negativo o cero
+   * Que el Tipo de id sea desconocido
+   * Que la consulta de datos  extraños
+   * Que la consulta de datos consistentes
+   * Que no halla id's repetidas
+   * 
+   * 
+   */
+  @Test
+  public void CE1RegistroConsultaPacientesError(){
+      try {
+          ServiciosPacientes sp = new ServiciosPacientesStub();
+          String paramDateAsString = "1995-05-15";
+          sp.agregarConsultaAPaciente(1, "cc", new Consulta(Date.valueOf(paramDateAsString), "El paciente esta muerto"));
+          fail("No debio agregarlo");
+      } catch (ExcepcionServiciosPacientes ex) {
+          assertTrue(true);
+      }
+  }
 }
