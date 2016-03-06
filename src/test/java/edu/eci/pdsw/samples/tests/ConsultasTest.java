@@ -20,7 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import edu.eci.pdsw.samples.entities.*;
-import edu.eci.pdsw.samples.managedbeans.*;
 import edu.eci.pdsw.samples.services.*;
 import java.sql.*;
 import java.text.*;

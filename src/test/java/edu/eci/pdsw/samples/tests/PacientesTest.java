@@ -19,7 +19,9 @@ package edu.eci.pdsw.samples.tests;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import edu.eci.pdsw.samples.entities.*;
+import edu.eci.pdsw.samples.services.*;
+import java.sql.Date;
 /**
  *
  * @author hcadavid
@@ -28,7 +30,15 @@ public class PacientesTest {
     
     /**
      * Clases de equvalencia
+     * 
      */
     
-    
+    @Test
+    public void CE1RegistroConsultaPacientesError() throws ExcepcionServiciosPacientes{
+        ServiciosPacientes sp = new ServiciosPacientesStub();
+        String paramDateAsString = "1995-05-15";
+        Paciente p = new Paciente(0,"cc" , "Hugo Alvarez",Date.valueOf(paramDateAsString));
+        sp.registrarNuevoPaciente(p);
+        assertEquals(p.getNombre(),sp.consultarPaciente(0, "cc").getNombre());
+    }
 }
