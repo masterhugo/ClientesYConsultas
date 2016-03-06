@@ -26,17 +26,9 @@ import static org.junit.Assert.*;
  */
 public class PacientesTest {
     
-    public PacientesTest() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @Test
-    public void registroPacienteTest(){
-        
-    }
+    /**
+     * Clases de equvalencia
+     */
     
     
 }
