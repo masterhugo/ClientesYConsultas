@@ -34,17 +34,14 @@ import java.util.logging.Logger;
 public class ConsultasTest {
   /**
    * Clases de Equivalencia
-   * Que consulte bien
-   * Que el id no exista pero si existe el Tipo de id
-   * Que el id exista pero no existe el Tipo de id
+   * Que agergue la consulta bien
+   * Que el id exista pero no el tipo de id
+   * que el tipo de id exista pero no el id
    * Que ninguno de los dos exista
    * Que el id sea negativo o cero
    * Que el Tipo de id sea desconocido
-   * Que la consulta de datos  extraños
-   * Que la consulta de datos consistentes
-   * Que no halla id's repetidas
-   * 
-   * 
+   * Que la fecha sea mayor a la actual
+   * Que la descripcion sea nula
    */
   @Test
   public void CE1RegistroConsultaPacientesError(){
