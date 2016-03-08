@@ -30,6 +30,14 @@ public class PacientesTest {
     
     /**
      * Clases de equvalencia
+     * el id no puede ser negativo
+     * el id no se puede repetir
+     * no agregar un tipo de id desconocido
+     * el tipo de id no es nulo
+     * el id no es nulo
+     * el nombre no es nulo
+     * la fecha de naciemiento no exceda de las 150 años
+     * la fecha de naciemiento no sea la actual o mayor
      * 
      */
     
