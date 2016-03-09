@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.util.*;
 
 /**
  *
@@ -64,4 +65,12 @@ public abstract class ServiciosPacientes {
      */
     public abstract void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c) throws ExcepcionServiciosPacientes;
     
+    /**
+     * Agrega una consulta a un paciente ya registrado
+     * @param idPaciente el identificador del paciente
+     * @param tipoid el tipo de identificación
+     * @param c la consulta a ser agregada
+     * @throws ExcepcionServiciosPacientes si se presenta algún error de persistencia o si el paciente no existe.
+     */
+    public abstract ArrayList<Paciente> consultarPacientes();
 }

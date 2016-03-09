@@ -16,20 +16,85 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
-import edu.eci.pdsw.samples.services.ServiciosPacientes;
+import edu.eci.pdsw.samples.services.*;
+import edu.eci.pdsw.samples.entities.*;
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
+import java.sql.Date;
+import java.util.*;
+import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author hcadavid
  */
-@ManagedBean
+@ManagedBean(name="registro")
 @SessionScoped
 public class RegistroConsultaBean implements Serializable{
+    private int id;
+    private String tipo_id;
+    private String nombre,campo;
+    private String fechaNacimiento;
+    private List<Paciente> pacientes;
+    
+    public String getCampo() {
+        return campo;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
     
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    Paciente selectPaciente;
+
+    public Paciente getSelectPaciente() {
+        return selectPaciente;
+    }
+
+    public void setSelectPaciente(Paciente selectPaciente) {
+        this.selectPaciente = selectPaciente;
+    }
     
+    public void agregarPaciente(){
+        try {
+            String[] a = fechaNacimiento.split("-");
+            int y=Integer.parseInt(a[0]),m=Integer.parseInt(a[1]),d=Integer.parseInt(a[2]);
+            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,new Date(y,m,d)));
+        } catch (ExcepcionServiciosPacientes ex) {
+            campo = "No se pudo agregar :(";
+        }
+    }
+    
+    public List<Paciente> getPacientes(){
+        return sp.consultarPacientes();
+    }
     
 }
