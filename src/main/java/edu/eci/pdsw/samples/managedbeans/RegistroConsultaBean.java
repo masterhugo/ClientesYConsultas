@@ -97,4 +97,8 @@ public class RegistroConsultaBean implements Serializable{
         return sp.consultarPacientes();
     }
     
+    Consulta c;
+    public void agregarConsulta(){
+        c = new Consulta();
+    }
 }
