@@ -22,9 +22,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
-import org.primefaces.event.SelectEvent;
+import javax.faces.bean.SessionScoped;
+
 
 /**
  *
@@ -42,7 +41,7 @@ public class RegistroConsultaBean implements Serializable{
     private String resumen;
     private List<Consulta> consultas =  new LinkedList<Consulta>();
     private final ServiciosPacientes sp=ServiciosPacientes.getInstance();
-    private Paciente selectPaciente;
+    private Paciente selectPaciente,pre;
     
     public void agregarConsulta(){
         try {
@@ -53,6 +52,8 @@ public class RegistroConsultaBean implements Serializable{
     }
     
     public List<Consulta> getConsultas(){
+        System.out.println("aqui esta el error "+this);
+        System.out.println("aqui esta el error "+selectPaciente);
         return new ArrayList<>(selectPaciente.getConsultas());
     }
 

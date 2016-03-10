@@ -93,6 +93,12 @@ public class Paciente {
         }
         return rep;
     }
+
+    @Override
+    public Paciente clone() throws CloneNotSupportedException {
+        Paciente p = new Paciente(id, tipo_id, nombre, fechaNacimiento);
+        return p;
+    }
     
     
     

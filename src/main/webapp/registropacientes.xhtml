@@ -13,7 +13,7 @@
             fecha de naciemiento(yyyy-mm-dd): <p:inputText value="#{registro.fechaNacimiento}"/><br></br>
             <p:commandButton value="Agregar paciente" actionListener="#{registro.agregarPaciente()}" update="paciente"></p:commandButton>
             <br></br>
-            <p:dataTable id="check" var="regit"  value="#{registro.pacientes}" selection="#{registro.selectPaciente}" rowKey="#{regit.id}" 
+            <p:dataTable id="check" var="regit"  value="#{registro.pacientes}" rowKey="#{regit.id}" 
                          style="margin-bottom:0" rowIndexVar="rowIndex" >
                 <f:facet name="header">
                     Pacientes
