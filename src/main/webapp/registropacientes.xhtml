@@ -15,11 +15,9 @@
             <br></br>
             <p:dataTable id="check" var="regit"  value="#{registro.pacientes}" selection="#{registro.selectPaciente}" rowKey="#{regit.id}" 
                          style="margin-bottom:0" rowIndexVar="rowIndex" >
-                <p:ajax event="rowSelect" listener="#{registro.guardar}"/>
                 <f:facet name="header">
                     Pacientes
                 </f:facet>
-                <p:column selectionMode="single" style="width:16px;text-align:center"/>
                 <p:column headerText="Id">
                     <h:outputText value="#{regit.id}" />
                 </p:column>
@@ -33,10 +31,15 @@
                 <p:column headerText="Fecha de nacimiento">
                     <h:outputText value="#{regit.fechaNacimiento}" />
                 </p:column>
+                <p:column headerText="Registro">
+                    <p:commandButton value="Registrar cita" action="registroconsultas">
+                        <f:setPropertyActionListener value="#{regit}" target="#{registro.selectPaciente}"/>
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
             
             <br></br>
-            <p:commandButton value="Registrar cita" action="registroconsultas"></p:commandButton>
+            
         </h:form>
     </h:body>
 

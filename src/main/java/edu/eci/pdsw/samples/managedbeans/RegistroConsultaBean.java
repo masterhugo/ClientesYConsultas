@@ -40,27 +40,20 @@ public class RegistroConsultaBean implements Serializable{
     private List<Paciente> pacientes;
     private String fechayHora;
     private String resumen;
-    private List<Consulta> consultas;
+    private List<Consulta> consultas =  new LinkedList<Consulta>();
     private final ServiciosPacientes sp=ServiciosPacientes.getInstance();
     private Paciente selectPaciente;
-    private Paciente perm;
     
     public void agregarConsulta(){
         try {
-            String[] a = fechayHora.split("-");
-            int y=Integer.parseInt(a[0]),m=Integer.parseInt(a[1]),d=Integer.parseInt(a[2]);
-            System.out.println(perm.getId()+" "+perm.getTipo_id());
-            sp.agregarConsultaAPaciente(perm.getId(), perm.getTipo_id(), new Consulta(new Date(y,m,d),resumen));
-            System.out.println(perm.getConsultas().size());
+            sp.agregarConsultaAPaciente(selectPaciente.getId(), selectPaciente.getTipo_id(), new Consulta(Date.valueOf(fechayHora),resumen));
         } catch (ExcepcionServiciosPacientes ex) {
             campo = "No se pudo agregar :(";
         }
     }
     
     public List<Consulta> getConsultas(){
-        if(selectPaciente!=null) perm = selectPaciente;
-        System.out.println("Aqui inicia "+perm);
-        return sp.consultarConsultas(perm);
+        return new ArrayList<>(selectPaciente.getConsultas());
     }
 
     public String getFechayHora() {
@@ -68,6 +61,7 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public void setFechayHora(String fechayHora) {
+        System.out.println(fechayHora);
         this.fechayHora = fechayHora;
     }
 
@@ -76,6 +70,7 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public void setResumen(String resumen) {
+        System.out.println(resumen);
         this.resumen = resumen;
     }
     
@@ -126,9 +121,7 @@ public class RegistroConsultaBean implements Serializable{
     
     public void agregarPaciente(){
         try {
-            String[] a = fechaNacimiento.split("-");
-            int y=Integer.parseInt(a[0]),m=Integer.parseInt(a[1]),d=Integer.parseInt(a[2]);
-            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,new Date(y,m,d)));
+            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,Date.valueOf(fechaNacimiento)));
         } catch (ExcepcionServiciosPacientes ex) {
             campo = "No se pudo agregar :(";
         }
@@ -138,8 +131,4 @@ public class RegistroConsultaBean implements Serializable{
         return sp.consultarPacientes();
     }
     
-    public void guardar(SelectEvent event) {
-        System.out.println(event.toString());
-    }
-
 }

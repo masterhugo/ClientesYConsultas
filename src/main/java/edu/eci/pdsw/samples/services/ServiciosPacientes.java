@@ -71,10 +71,4 @@ public abstract class ServiciosPacientes {
      */
     public abstract ArrayList<Paciente> consultarPacientes();
     
-    /**
-     * Obtener todos las consultas de un paciente
-     * @param paciente, el paciente a consultar
-     * @return la lista de consultas encontrados del paciente
-     */
-    public abstract ArrayList<Consulta> consultarConsultas(Paciente paciente);
 }
