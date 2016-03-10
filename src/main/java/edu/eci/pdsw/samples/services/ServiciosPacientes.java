@@ -66,11 +66,15 @@ public abstract class ServiciosPacientes {
     public abstract void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c) throws ExcepcionServiciosPacientes;
     
     /**
-     * Agrega una consulta a un paciente ya registrado
-     * @param idPaciente el identificador del paciente
-     * @param tipoid el tipo de identificación
-     * @param c la consulta a ser agregada
-     * @throws ExcepcionServiciosPacientes si se presenta algún error de persistencia o si el paciente no existe.
+     * Obtener todos los pacientes del sistema
+     * @return la lista de pacientes encontrados en el sistema
      */
     public abstract ArrayList<Paciente> consultarPacientes();
+    
+    /**
+     * Obtener todos las consultas de un paciente
+     * @param paciente, el paciente a consultar
+     * @return la lista de consultas encontrados del paciente
+     */
+    public abstract ArrayList<Consulta> consultarConsultas(Paciente paciente);
 }

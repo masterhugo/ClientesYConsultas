@@ -36,6 +36,44 @@ public class RegistroConsultaBean implements Serializable{
     private String nombre,campo;
     private String fechaNacimiento;
     private List<Paciente> pacientes;
+    private String fechayHora;
+    private String resumen;
+    private List<Consulta> consultas;
+    ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    Paciente selectPaciente;
+    Paciente perm;
+    
+    public void agregarConsulta(){
+        try {
+            String[] a = fechayHora.split("-");
+            int y=Integer.parseInt(a[0]),m=Integer.parseInt(a[1]),d=Integer.parseInt(a[2]);
+            System.out.println(perm.getId()+" "+perm.getTipo_id());
+            sp.agregarConsultaAPaciente(perm.getId(), perm.getTipo_id(), new Consulta(new Date(y,m,d),resumen));
+            System.out.println(perm.getConsultas().size());
+        } catch (ExcepcionServiciosPacientes ex) {
+            campo = "No se pudo agregar :(";
+        }
+    }
+    
+    public List<Consulta> getConsultas(){
+        return sp.consultarConsultas(perm);
+    }
+
+    public String getFechayHora() {
+        return fechayHora;
+    }
+
+    public void setFechayHora(String fechayHora) {
+        this.fechayHora = fechayHora;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
     
     public String getCampo() {
         return campo;
@@ -71,15 +109,13 @@ public class RegistroConsultaBean implements Serializable{
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    ServiciosPacientes sp=ServiciosPacientes.getInstance();
-    Paciente selectPaciente;
 
     public Paciente getSelectPaciente() {
         return selectPaciente;
     }
 
     public void setSelectPaciente(Paciente selectPaciente) {
+        if(selectPaciente!=null)perm = selectPaciente;
         this.selectPaciente = selectPaciente;
     }
     
@@ -97,8 +133,4 @@ public class RegistroConsultaBean implements Serializable{
         return sp.consultarPacientes();
     }
     
-    Consulta c;
-    public void agregarConsulta(){
-        c = new Consulta();
-    }
 }

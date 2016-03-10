@@ -7,7 +7,32 @@
 
     <h:body>
         <h:form id="consulta">
-            hola
+            Paciente:<br></br>
+            Id: <h:outputText value="#{registro.selectPaciente.id}" /><br></br>
+            Tipo de Identificiacion: <h:outputText value="#{registro.selectPaciente.tipo_id}" /><br></br>
+            Nombre: <h:outputText value="#{registro.selectPaciente.nombre}" /><br></br>
+            fecha de naciemiento(yyyy-mm-dd): <h:outputText value="#{registro.selectPaciente.fechaNacimiento}" /><br></br>
+            <br></br>
+            <br></br>
+            Registrar Consulta:<br></br>
+            Fecha de la consulta(yyyy-mm-dd): <p:inputText value="#{registro.fechayHora}"/><br></br>
+            resumen: <p:inputText value="#{registro.resumen}"/><br></br>
+            <p:commandButton process="check" value="Agregar consulta" actionListener="#{registro.agregarConsulta}" update="consulta"></p:commandButton>
+            <br></br>
+            <p:dataTable id="check" var="regit"  value="#{registro.consultas}" 
+                         style="margin-bottom:0">
+                <f:facet name="header">
+                    Consultas
+                </f:facet>
+                <p:column headerText="Fecha de la consulta" >
+                    <h:outputText value="#{regit.fechayHora}" />
+                </p:column>
+                <p:column headerText="resumen" >
+                    <h:outputText value="#{regit.resumen}" />
+                </p:column>
+            </p:dataTable>
+            <br></br>
+            <p:commandButton value="Volver" action="registropacientes"></p:commandButton>
         </h:form>
     </h:body>
 

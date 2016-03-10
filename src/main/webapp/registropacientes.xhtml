@@ -8,7 +8,7 @@
     <h:body>
         <h:form id = "paciente">
             id: <p:inputText value="#{registro.id}"/><br></br>
-            tipo de id: <p:inputText value="#{registro.tipo_id}"/><br></br>
+            tipo de identificacion: <p:inputText value="#{registro.tipo_id}"/><br></br>
             nombre: <p:inputText value="#{registro.nombre}"/><br></br>
             fecha de naciemiento(yyyy-mm-dd): <p:inputText value="#{registro.fechaNacimiento}"/><br></br>
             <p:commandButton value="Agregar paciente" actionListener="#{registro.agregarPaciente()}" update="paciente"></p:commandButton>
@@ -19,7 +19,7 @@
                     Pacientes
                 </f:facet>
                 <p:column selectionMode="single" style="width:16px;text-align:center"/>
-                <p:column headerText="Id" sortBy="#{product.id}">
+                <p:column headerText="Id">
                     <h:outputText value="#{regit.id}" />
                 </p:column>
                 <p:column headerText="Tipo de Id" >

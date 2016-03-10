@@ -18,7 +18,6 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
-import java.sql.Date;
 import java.util.*;
 import java.util.logging.*;
 
@@ -80,11 +79,18 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     @Override
     public ArrayList<Paciente> consultarPacientes() {
-        ArrayList<Paciente> p = new ArrayList<Paciente>();
+        ArrayList<Paciente> p = new ArrayList<>();
         for (Map.Entry<Tupla<Integer, String>, Paciente> entrySet : pacientes.entrySet()) {
             p.add(entrySet.getValue());
         }
         return p;
+    }
+
+    @Override
+    public ArrayList<Consulta> consultarConsultas(Paciente paciente) {
+        System.out.println(paciente);
+        System.out.println(paciente.getConsultas());
+        return new ArrayList<>();
     }
    
 
