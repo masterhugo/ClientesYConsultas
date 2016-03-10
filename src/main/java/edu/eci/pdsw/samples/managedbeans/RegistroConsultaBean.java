@@ -23,6 +23,8 @@ import java.sql.Date;
 import java.util.*;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -39,9 +41,9 @@ public class RegistroConsultaBean implements Serializable{
     private String fechayHora;
     private String resumen;
     private List<Consulta> consultas;
-    ServiciosPacientes sp=ServiciosPacientes.getInstance();
-    Paciente selectPaciente;
-    Paciente perm;
+    private final ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    private Paciente selectPaciente;
+    private Paciente perm;
     
     public void agregarConsulta(){
         try {
@@ -56,6 +58,8 @@ public class RegistroConsultaBean implements Serializable{
     }
     
     public List<Consulta> getConsultas(){
+        if(selectPaciente!=null) perm = selectPaciente;
+        System.out.println("Aqui inicia "+perm);
         return sp.consultarConsultas(perm);
     }
 
@@ -111,11 +115,12 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public Paciente getSelectPaciente() {
+        System.out.println("Get "+selectPaciente);
         return selectPaciente;
     }
 
     public void setSelectPaciente(Paciente selectPaciente) {
-        if(selectPaciente!=null)perm = selectPaciente;
+        System.out.println("Set "+selectPaciente);
         this.selectPaciente = selectPaciente;
     }
     
@@ -133,4 +138,8 @@ public class RegistroConsultaBean implements Serializable{
         return sp.consultarPacientes();
     }
     
+    public void guardar(SelectEvent event) {
+        System.out.println(event.toString());
+    }
+
 }

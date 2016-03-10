@@ -13,8 +13,9 @@
             fecha de naciemiento(yyyy-mm-dd): <p:inputText value="#{registro.fechaNacimiento}"/><br></br>
             <p:commandButton value="Agregar paciente" actionListener="#{registro.agregarPaciente()}" update="paciente"></p:commandButton>
             <br></br>
-            <p:dataTable id="check" var="regit"  value="#{registro.pacientes}" selection="#{registro.selectPaciente}" rowKey="#{registro.id}" 
-                         style="margin-bottom:0" rowIndexVar="rowIndex">
+            <p:dataTable id="check" var="regit"  value="#{registro.pacientes}" selection="#{registro.selectPaciente}" rowKey="#{regit.id}" 
+                         style="margin-bottom:0" rowIndexVar="rowIndex" >
+                <p:ajax event="rowSelect" listener="#{registro.guardar}"/>
                 <f:facet name="header">
                     Pacientes
                 </f:facet>
@@ -33,6 +34,7 @@
                     <h:outputText value="#{regit.fechaNacimiento}" />
                 </p:column>
             </p:dataTable>
+            
             <br></br>
             <p:commandButton value="Registrar cita" action="registroconsultas"></p:commandButton>
         </h:form>

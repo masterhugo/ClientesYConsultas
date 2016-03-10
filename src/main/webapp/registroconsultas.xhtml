@@ -17,7 +17,7 @@
             Registrar Consulta:<br></br>
             Fecha de la consulta(yyyy-mm-dd): <p:inputText value="#{registro.fechayHora}"/><br></br>
             resumen: <p:inputText value="#{registro.resumen}"/><br></br>
-            <p:commandButton process="check" value="Agregar consulta" actionListener="#{registro.agregarConsulta}" update="consulta"></p:commandButton>
+            <p:commandButton value="Agregar consulta" actionListener="#{registro.agregarConsulta}" update="consulta"></p:commandButton>
             <br></br>
             <p:dataTable id="check" var="regit"  value="#{registro.consultas}" 
                          style="margin-bottom:0">
