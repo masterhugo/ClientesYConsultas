@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ import java.util.Set;
  *
  * @author hcadavid
  */
-public class Paciente {
+public class Paciente implements Serializable{
     
     private int id;
     private String tipo_id;
@@ -93,13 +94,4 @@ public class Paciente {
         }
         return rep;
     }
-
-    @Override
-    public Paciente clone() throws CloneNotSupportedException {
-        Paciente p = new Paciente(id, tipo_id, nombre, fechaNacimiento);
-        return p;
-    }
-    
-    
-    
 }

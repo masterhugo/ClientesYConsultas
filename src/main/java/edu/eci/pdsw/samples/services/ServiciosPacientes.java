@@ -18,13 +18,14 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author hcadavid
  */
-public abstract class ServiciosPacientes {
+public abstract class ServiciosPacientes implements Serializable{
     
     
     private static ServiciosPacientes instance=new ServiciosPacientesStub();

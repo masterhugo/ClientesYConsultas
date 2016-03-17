@@ -52,8 +52,6 @@ public class RegistroConsultaBean implements Serializable{
     }
     
     public List<Consulta> getConsultas(){
-        System.out.println("aqui esta el error "+this);
-        System.out.println("aqui esta el error "+selectPaciente);
         return new ArrayList<>(selectPaciente.getConsultas());
     }
 
@@ -62,7 +60,6 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public void setFechayHora(String fechayHora) {
-        System.out.println(fechayHora);
         this.fechayHora = fechayHora;
     }
 
@@ -71,7 +68,6 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public void setResumen(String resumen) {
-        System.out.println(resumen);
         this.resumen = resumen;
     }
     
@@ -111,12 +107,10 @@ public class RegistroConsultaBean implements Serializable{
     }
 
     public Paciente getSelectPaciente() {
-        System.out.println("Get "+selectPaciente);
         return selectPaciente;
     }
 
     public void setSelectPaciente(Paciente selectPaciente) {
-        System.out.println("Set "+selectPaciente);
         this.selectPaciente = selectPaciente;
     }
     
