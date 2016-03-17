@@ -49,6 +49,7 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
         } catch (PersistenceException ex) {
             if(daof!=null){
                 try {
+                    daof.rollbackTransaction();
                     daof.endSession();
                 } catch (PersistenceException ex1) {
                     Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);
@@ -60,12 +61,55 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
 
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
-        
+        try {
+            daof.beginSession();
+            DaoPaciente paciente = daof.getDaoPaciente();
+            String check =null;
+            Paciente p1 = null;
+            try{
+                p1 = paciente.load(p.getId(),p.getTipo_id());
+            }catch(PersistenceException ex){
+                check = ex.getMessage();
+            }
+            if(check!=null){
+                paciente.save(p);
+            }
+            daof.commitTransaction();        
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            if(daof!=null){
+                try {
+                    daof.rollbackTransaction();
+                    daof.endSession();
+                } catch (PersistenceException ex1) {
+                    Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+        }
     }
 
     @Override
     public void agregarConsultaAPaciente(int idPaciente, String tipoid, Consulta c) throws ExcepcionServiciosPacientes {
-        
+        try {
+            daof.beginSession();
+            DaoPaciente paciente = daof.getDaoPaciente();
+            Paciente p = paciente.load(idPaciente, tipoid);
+            if(p!=null){
+                paciente.save(p);
+            }
+            paciente.save(p);
+            daof.commitTransaction();        
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            if(daof!=null){
+                try {
+                    daof.rollbackTransaction();
+                    daof.endSession();
+                } catch (PersistenceException ex1) {
+                    Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+        }
     }
 
     @Override
@@ -80,6 +124,7 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
         } catch (PersistenceException ex) {
             if(daof!=null){
                 try {
+                    daof.rollbackTransaction();
                     daof.endSession();
                 } catch (PersistenceException ex1) {
                     Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);

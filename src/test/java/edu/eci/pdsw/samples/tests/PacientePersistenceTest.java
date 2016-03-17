@@ -47,7 +47,7 @@ public class PacientePersistenceTest {
             paciente.save(new Paciente(1, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15")));
             
             Paciente p3 = paciente.load(1, "CC");
-            assertEquals(p3.getConsultas().size(), 0);
+            assertEquals(0,p3.getConsultas().size());
             
             daof.commitTransaction();        
             daof.endSession();
@@ -81,7 +81,7 @@ public class PacientePersistenceTest {
             p.setConsultas(cons);
             paciente.save(p);
             Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
-            assertEquals(p3.getConsultas().size(), 1);
+            assertEquals(1,p3.getConsultas().size());
             daof.commitTransaction();        
             daof.endSession();
         } catch (IOException | PersistenceException ex) {
@@ -117,7 +117,7 @@ public class PacientePersistenceTest {
             
             
             Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
-            assertEquals(p3.getConsultas().size(), 2);
+            assertEquals(2,p3.getConsultas().size());
             daof.commitTransaction();        
             daof.endSession();
         } catch (IOException | PersistenceException ex) {
@@ -165,7 +165,7 @@ public class PacientePersistenceTest {
                     System.out.println("Hubo un error al cerrar y lanzo: "+ex1.getMessage());
                 }
             }
-            assertEquals(ex.getMessage(), "No inserto los datos, revisar la base de datos");
+            assertEquals("No inserto los datos, revisar la base de datos",ex.getMessage());
         }
     }
     

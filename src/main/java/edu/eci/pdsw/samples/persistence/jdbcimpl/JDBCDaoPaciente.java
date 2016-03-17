@@ -62,7 +62,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
             while(rs.next()){
                 nombre = rs.getString("nombre");
                 fechanam = rs.getDate("fecha_nacimiento");
-                if(rs.getDate("fecha_y_hora")!= null) cons.add(new Consulta(rs.getDate("fecha_y_hora"), rs.getString("resumen")));
+                if(rs.getDate("fecha_y_hora")!= null) cons.add(new Consulta(rs.getInt("idCONSULTAS"),rs.getDate("fecha_y_hora"), rs.getString("resumen")));
             }
             if(nombre != null){
                 p = new Paciente(idpaciente,tipoid,nombre,fechanam);
@@ -80,12 +80,11 @@ public class JDBCDaoPaciente implements DaoPaciente {
         PreparedStatement ps;
         String insert = "insert into PACIENTES(id,tipo_id,nombre,fecha_nacimiento) values(?,?,?,?)";
         try {
+            int id = p.getId();
+            String tipo = p.getTipo_id();
             //registro el paciente
             Date fecha = p.getFechaNacimiento();
             String nombre = p.getNombre();
-            String tipo = p.getTipo_id();
-            int id = p.getId();
-            Set<Consulta> cons = p.getConsultas();
             ps = con.prepareStatement(insert);
             ps.setInt(1, id);
             ps.setString(2, tipo);
@@ -93,6 +92,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
             ps.setDate(4, fecha);
             ps.executeUpdate();
             
+            Set<Consulta> cons = p.getConsultas();
             //registro las consultas del paciente
             insert = "insert into CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(?,?,?,?)";
             ps = con.prepareStatement(insert);
