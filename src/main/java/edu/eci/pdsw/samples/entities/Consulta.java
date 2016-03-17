@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -35,6 +36,11 @@ public class Consulta implements Serializable{
     
     public Consulta(Date fechayHora, String resumen) {
         this.id=-1;
+        this.fechayHora = fechayHora;
+        this.resumen = resumen;
+    }
+    public Consulta(int id, Date fechayHora, String resumen) {
+        this.id=id;
         this.fechayHora = fechayHora;
         this.resumen = resumen;
     }    
@@ -69,6 +75,21 @@ public class Consulta implements Serializable{
     @Override
     public String toString() {
         return "("+id+","+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Consulta c= (Consulta)obj;
+        return this.id == c.getId() && this.fechayHora.equals(c.getFechayHora()) && this.resumen.equalsIgnoreCase(c.getResumen());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.fechayHora);
+        hash = 29 * hash + Objects.hashCode(this.resumen);
+        return hash;
     }
     
     
