@@ -73,7 +73,7 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
             }
             if(check!=null){
                 paciente.save(p);
-            }
+            }else paciente.update(p);
             daof.commitTransaction();        
             daof.endSession();
         } catch (PersistenceException ex) {

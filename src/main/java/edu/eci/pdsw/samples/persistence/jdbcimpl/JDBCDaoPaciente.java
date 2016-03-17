@@ -113,11 +113,17 @@ public class JDBCDaoPaciente implements DaoPaciente {
     @Override
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
-        /*try {
-            
+        String update = "update PACIENTES set nombre = ?, fecha_nacimiento = ? where id = ? and tipo_id = ?";
+        try {
+            ps = con.prepareStatement(update);
+            ps.setInt(3, p.getId());
+            ps.setString(4, p.getTipo_id());
+            ps.setString(1, p.getNombre());
+            ps.setDate(2, p.getFechaNacimiento());
+            ps.executeUpdate();
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading a product.",ex);
-        } */
+        } 
         
     }
 
