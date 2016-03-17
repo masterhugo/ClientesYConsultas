@@ -72,4 +72,10 @@ public abstract class ServiciosPacientes implements Serializable{
      */
     public abstract ArrayList<Paciente> consultarPacientes();
     
+    /**
+     * Obtener todos las consultas del paciente
+     * @param p, paciente a revisar sus consultas
+     * @return la lista de consultas del paciente encontrados en el sistema
+     */
+    public abstract ArrayList<Consulta> consultarConsultas(Paciente p);
 }

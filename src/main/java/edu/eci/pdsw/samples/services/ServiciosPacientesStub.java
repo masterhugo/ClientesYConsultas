@@ -85,7 +85,11 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         }
         return p;
     }
-   
+
+    @Override
+    public ArrayList<Consulta> consultarConsultas(Paciente p) {
+        return new ArrayList<>(p.getConsultas());
+    }
 
 }
 

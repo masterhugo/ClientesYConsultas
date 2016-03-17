@@ -113,9 +113,10 @@ public class JDBCDaoPaciente implements DaoPaciente {
     @Override
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
-        String update = "update PACIENTES set nombre = ?, fecha_nacimiento = ? where id = ? and tipo_id = ?";
+        String update1 = "update PACIENTES set nombre = ?, fecha_nacimiento = ? where id = ? and tipo_id = ?";
+        String update2 = "update CONSULTAS set nombre = ?, fecha_nacimiento = ? where PACIENTES_tipo_id = ? and PACIENTES_tipo_id = ?";
         try {
-            ps = con.prepareStatement(update);
+            ps = con.prepareStatement(update1);
             ps.setInt(3, p.getId());
             ps.setString(4, p.getTipo_id());
             ps.setString(1, p.getNombre());

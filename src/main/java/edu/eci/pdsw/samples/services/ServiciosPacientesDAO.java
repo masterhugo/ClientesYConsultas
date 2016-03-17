@@ -93,11 +93,21 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
         try {
             daof.beginSession();
             DaoPaciente paciente = daof.getDaoPaciente();
-            Paciente p = paciente.load(idPaciente, tipoid);
-            if(p!=null){
-                paciente.save(p);
+            String check = null;
+            Paciente p1 = null;
+            try{
+                p1 = paciente.load(idPaciente,tipoid);
+            }catch(PersistenceException ex){
+                check = ex.getMessage();
             }
-            paciente.save(p);
+            if(check == null){
+                Set<Consulta> cons = p1.getConsultas();
+                cons.add(c);
+                p1.setConsultas(cons);
+                paciente.save(p1);
+                
+            }
+            
             daof.commitTransaction();        
             daof.endSession();
         } catch (PersistenceException ex) {
@@ -132,6 +142,37 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
             }
         }
         return p;
+    }
+
+    @Override
+    public ArrayList<Consulta> consultarConsultas(Paciente p) {
+        ArrayList<Consulta> cons = null;
+        try {
+            daof.beginSession();
+            DaoPaciente paciente = daof.getDaoPaciente();
+            String check =null;
+            Paciente p1 = null;
+            try{
+                p1 = paciente.load(p.getId(),p.getTipo_id());
+            }catch(PersistenceException ex){
+                check = ex.getMessage();
+            }
+            if(check == null){
+                cons = new ArrayList<>(p1.getConsultas());
+            }
+            daof.commitTransaction();        
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            if(daof!=null){
+                try {
+                    daof.rollbackTransaction();
+                    daof.endSession();
+                } catch (PersistenceException ex1) {
+                    Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+        }
+        return cons;
     }
     
 }

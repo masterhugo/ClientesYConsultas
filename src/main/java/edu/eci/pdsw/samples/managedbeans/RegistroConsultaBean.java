@@ -41,7 +41,7 @@ public class RegistroConsultaBean implements Serializable{
     private String resumen;
     private List<Consulta> consultas =  new LinkedList<Consulta>();
     private final ServiciosPacientes sp=ServiciosPacientes.getInstance();
-    private Paciente selectPaciente,pre;
+    private Paciente selectPaciente;
     
     public void agregarConsulta(){
         try {
@@ -52,7 +52,7 @@ public class RegistroConsultaBean implements Serializable{
     }
     
     public List<Consulta> getConsultas(){
-        return new ArrayList<>(selectPaciente.getConsultas());
+        return sp.consultarConsultas(selectPaciente);
     }
 
     public String getFechayHora() {
