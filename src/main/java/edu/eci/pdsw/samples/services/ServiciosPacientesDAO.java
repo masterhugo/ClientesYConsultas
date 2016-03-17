@@ -21,7 +21,7 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
     public ServiciosPacientesDAO() {
         InputStream input = null;
         try {
-            input = getClass().getResource("applicationconfig.properties").openStream();
+            input = getClass().getClassLoader().getResource("applicationconfig.properties").openStream();
             Properties properties=new Properties();
             properties.load(input);
             daof=DaoFactory.getInstance(properties);
@@ -70,7 +70,23 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
 
     @Override
     public ArrayList<Paciente> consultarPacientes() {
-        return null;
+        ArrayList<Paciente> p = null;
+        try {
+            daof.beginSession();
+            DaoPaciente paciente = daof.getDaoPaciente();
+            p = paciente.loadAll();
+            daof.commitTransaction();        
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            if(daof!=null){
+                try {
+                    daof.endSession();
+                } catch (PersistenceException ex1) {
+                    Logger.getLogger(ServiciosPacientesDAO.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+        }
+        return p;
     }
     
 }

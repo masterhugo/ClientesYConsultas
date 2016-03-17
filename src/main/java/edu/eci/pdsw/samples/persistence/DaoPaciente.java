@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.persistence;
 
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.util.ArrayList;
 
 
 /**
@@ -32,5 +33,5 @@ public interface DaoPaciente {
     
     public void update(Paciente p) throws PersistenceException;
     
-    
+    public ArrayList<Paciente> loadAll() throws PersistenceException;
 }

@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -117,7 +118,34 @@ public class JDBCDaoPaciente implements DaoPaciente {
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading a product.",ex);
         } */
-        throw new RuntimeException("No se ha implementado el metodo 'load' del DAOPAcienteJDBC");
+        
+    }
+
+    @Override
+    public ArrayList<Paciente> loadAll() throws PersistenceException {
+        PreparedStatement ps;
+        String select = "select * from PACIENTES";
+        ResultSet rs;
+        int id;
+        String nombre,tipo;
+        Date fechanam;
+        ArrayList<Paciente> pas = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(select,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            rs = ps.executeQuery();
+            if(!rs.first()) throw new PersistenceException("No encontro ningun resultado.");
+            rs.beforeFirst();
+            while(rs.next()){
+                id = rs.getInt("id");
+                tipo = rs.getString("tipo_id");
+                nombre = rs.getString("nombre");
+                fechanam = rs.getDate("fecha_nacimiento");
+                pas.add(new Paciente(id, tipo, nombre, fechanam));
+            }         
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error en: "+ex.getMessage());
+        }
+        return pas;
     }
     
 }

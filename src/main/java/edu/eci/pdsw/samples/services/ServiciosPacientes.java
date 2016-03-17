@@ -28,7 +28,7 @@ import java.util.*;
 public abstract class ServiciosPacientes implements Serializable{
     
     
-    private static ServiciosPacientes instance=new ServiciosPacientesStub();
+    private static ServiciosPacientes instance=new ServiciosPacientesDAO();
     
     
     protected ServiciosPacientes(){        
