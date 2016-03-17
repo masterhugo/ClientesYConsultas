@@ -98,13 +98,14 @@ public class ServiciosPacientesDAO extends ServiciosPacientes{
             try{
                 p1 = paciente.load(idPaciente,tipoid);
             }catch(PersistenceException ex){
+                System.out.println("");
                 check = ex.getMessage();
             }
             if(check == null){
                 Set<Consulta> cons = p1.getConsultas();
                 cons.add(c);
                 p1.setConsultas(cons);
-                paciente.save(p1);
+                paciente.update(p1);
                 
             }
             
