@@ -6,7 +6,7 @@ deployment:
   staging:
     branch: master
     heroku: 
-      appname: pdsw-PacienteConsulta
+      appname: pacientesyconsulta
 
 test:
   post:
