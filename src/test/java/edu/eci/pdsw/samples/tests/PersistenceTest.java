@@ -17,7 +17,7 @@
 package edu.eci.pdsw.samples.tests;
 
 import edu.eci.pdsw.samples.entities.*;
-import static edu.eci.pdsw.samples.textview.MyBatisExample.getSqlSessionFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.ibatis.io.Resources;
@@ -27,8 +27,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper;
-import static edu.eci.pdsw.samples.textview.MyBatisExample.registrarNuevoPaciente;
+import edu.eci.pdsw.samples.persistence.mybatis.mappers.PacienteMapper;
+
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +40,18 @@ import java.util.Set;
 public class PersistenceTest {
 
     public static SqlSessionFactory getSqlSessionFactory() {
-        
+        SqlSessionFactory sqlSessionFactory = null;
+        if (sqlSessionFactory == null) {
+            InputStream inputStream;
+            try {
+                inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
+                //inputStream = PersistenceTest.class.getClassLoader().getResource("mybatis-config-h2.xml").openStream();
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            } catch (IOException e) {
+                throw new RuntimeException(e.getCause());
+            }
+        }
+        return sqlSessionFactory;
     }
     @Test
     public void plantilla() {
@@ -63,13 +74,13 @@ public class PersistenceTest {
         SqlSession sqlss = sessionfact.openSession();
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        Paciente p = new Paciente(1, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+        Paciente p = new Paciente(4, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
         pmap.insertPaciente(p);
+        
+        sqlss.commit();
         Paciente p3 = pmap.loadPacienteById(1, "CC");
 
         assertEquals(0,p3.getConsultas().size());
-        sqlss.commit();
-
         sqlss.close();
     }
     @Test
@@ -87,11 +98,11 @@ public class PersistenceTest {
         for(Consulta c: cons){
             pmap.insertConsulta(c, 2, "CC");
         }
+        
+        sqlss.commit();
         Paciente p3 = pmap.loadPacienteById(2, "CC");
 
         assertEquals(1,p3.getConsultas().size());
-        sqlss.commit();
-
         sqlss.close();
     }
     @Test
@@ -110,10 +121,12 @@ public class PersistenceTest {
         for(Consulta c: cons){
             pmap.insertConsulta(c, 3, "CC");
         }
+        
+        sqlss.commit();
         Paciente p3 = pmap.loadPacienteById(3, "CC");
 
         assertEquals(2,p3.getConsultas().size());
-        sqlss.commit();
+        sqlss.close();
     }
     @Test
     public void AgregarPacienteNuevoDenuevoVariasConsultasALaBaseDeDatos(){

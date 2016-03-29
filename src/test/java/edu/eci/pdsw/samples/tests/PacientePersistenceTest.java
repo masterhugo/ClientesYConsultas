@@ -33,7 +33,7 @@ public class PacientePersistenceTest {
     
     @Test
     public void AgregarPacienteNuevoSinConsultasALaBaseDeDatos(){
-        /*DaoFactory daof = null;
+        DaoFactory daof = null;
         try {
             assertTrue(true);
             InputStream input = null;
@@ -47,21 +47,14 @@ public class PacientePersistenceTest {
             DaoPaciente paciente = daof.getDaoPaciente();
             paciente.save(new Paciente(1, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15")));
             
+
+            daof.commitTransaction();   
             Paciente p3 = paciente.load(1, "CC");
-            //assertEquals(0,p3.getConsultas().size());
-            assertTrue(true);
-            daof.commitTransaction();        
             daof.endSession();
+            assertEquals(0,p3.getConsultas().size());
         } catch (IOException | PersistenceException ex) {
-            if(daof!=null){
-                try {
-                    daof.endSession();
-                } catch (PersistenceException ex1) {
-                    System.out.println("Hubo un error al cerrar y lanzo: "+ex1.getMessage());
-                }
-            }
             fail("Hubo un error al iniciar o leer y lanzo prueba 1: "+ex.getMessage());
-        }*/assertTrue(true);
+        }
     }
     @Test
     public void AgregarPacienteNuevoUnaConsultaALaBaseDeDatos(){

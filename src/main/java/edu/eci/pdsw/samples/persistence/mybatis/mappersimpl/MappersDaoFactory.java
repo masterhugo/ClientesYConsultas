@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -38,18 +39,17 @@ public class MappersDaoFactory extends DaoFactory {
     
     
 
-    private static Properties appProperties=null;
     private static SqlSessionFactory sqlSessionFactory;
     private static SqlSession sqlss = null;
     public MappersDaoFactory(Properties appProperties){
-        this.appProperties=appProperties;
-        String config=appProperties.getProperty("config");
         sqlSessionFactory = null;
         try {
             InputStream inputStream;
-            inputStream = MappersDaoFactory.class.getClassLoader().getResource(config).openStream();
+            //inputStream = getClass().getClassLoader().getResource(config).openStream();
+            inputStream = Resources.getResourceAsStream(appProperties.getProperty("config"));
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         } catch (IOException ex) {
+            System.out.println(ex.getMessage()+" "+ex.getCause());
             throw new RuntimeException(ex.getCause());
         }
     }

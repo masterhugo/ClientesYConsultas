@@ -74,7 +74,7 @@ public class MappersDaoPaciente implements DaoPaciente {
 
     @Override
     public ArrayList<Paciente> loadAll() throws PersistenceException {
-        return new ArrayList<>(mp.loadPacientes());
+        return (ArrayList<Paciente>) mp.loadPacientes();
     }
     
 }
