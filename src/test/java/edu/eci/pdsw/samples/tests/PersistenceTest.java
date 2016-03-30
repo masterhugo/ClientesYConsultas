@@ -78,7 +78,7 @@ public class PersistenceTest {
         pmap.insertPaciente(p);
         
         sqlss.commit();
-        Paciente p3 = pmap.loadPacienteById(1, "CC");
+        Paciente p3 = pmap.loadPacienteById(4, "CC");
 
         assertEquals(0,p3.getConsultas().size());
         sqlss.close();

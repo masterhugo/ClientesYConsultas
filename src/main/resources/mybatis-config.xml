@@ -24,7 +24,8 @@
     </environments>
         
     <mappers>
-        <package name="edu.eci.pdsw.samples.persistence.mybatis.mappers"/>
+        <mapper resource="mappers/PacienteMapper.xml"></mapper>
+        <!--package name="edu.eci.pdsw.samples.persistence.mybatis.mappers"/-->
     </mappers> 
         
 </configuration>

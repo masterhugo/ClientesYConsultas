@@ -56,9 +56,9 @@ public class MappersDaoFactory extends DaoFactory {
     
     @Override
     public void beginSession() throws PersistenceException {
-        if(sqlss == null){
+        //if(sqlss == null){
             sqlss = sqlSessionFactory.openSession();
-        }
+        //}
     }
 
 

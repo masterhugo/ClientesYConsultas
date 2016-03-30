@@ -30,7 +30,7 @@
     <insert id="insertConsulta" useGeneratedKeys="true" keyProperty="consulta.id">
         insert into CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(#{consulta.fechayHora},#{consulta.resumen},#{idpaciente},#{tipoidapaciente})
     </insert>
-    <select id='loadPacientes' resultMap='PacienteResult'>
+    <select id='loadAll' resultMap='PacienteResult'>
         select pac.id, pac.tipo_id, pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as Consulta_ids, con.fecha_y_hora as Consulta_fechas, con.resumen as Consulta_resumenes
         from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id
     </select>

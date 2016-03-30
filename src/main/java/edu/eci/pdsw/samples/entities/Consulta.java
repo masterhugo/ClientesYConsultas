@@ -80,7 +80,7 @@ public class Consulta implements Serializable{
     @Override
     public boolean equals(Object obj) {
         Consulta c= (Consulta)obj;
-        return this.id == c.getId() && this.fechayHora.equals(c.getFechayHora()) && this.resumen.equalsIgnoreCase(c.getResumen());
+        return this.fechayHora.equals(c.getFechayHora()) && this.resumen.equalsIgnoreCase(c.getResumen());
     }
 
     @Override
