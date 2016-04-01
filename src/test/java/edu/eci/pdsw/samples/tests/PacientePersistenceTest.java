@@ -58,7 +58,7 @@ public class PacientePersistenceTest {
     }
     @Test
     public void AgregarPacienteNuevoUnaConsultaALaBaseDeDatos(){
-        /*DaoFactory daof = null;
+        DaoFactory daof = null;
         try {
             assertTrue(true);
             InputStream input;
@@ -75,10 +75,10 @@ public class PacientePersistenceTest {
             cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
             p.setConsultas(cons);
             paciente.save(p);
-            Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
-            //assertEquals(1,p3.getConsultas().size());
-            assertTrue(true);
+            
             daof.commitTransaction();        
+            Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
+            assertEquals(1,p3.getConsultas().size());
             daof.endSession();
         } catch (IOException | PersistenceException ex) {
             if(daof!=null){
@@ -89,12 +89,12 @@ public class PacientePersistenceTest {
                 }
             }
             fail("Hubo un error al iniciar o leer y lanzo prueba 2: "+ex.getMessage());
-        }*/
-        assertTrue(true);
+        }
+        
     }
     @Test
     public void AgregarPacienteNuevoMuchasConsultasALaBaseDeDatos(){
-        /*DaoFactory daof = null;
+        DaoFactory daof = null;
         try {
             assertTrue(true);
             InputStream input = null;
@@ -114,10 +114,10 @@ public class PacientePersistenceTest {
             paciente.save(p);
             
             
+            
+            daof.commitTransaction();       
             Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
-            //assertEquals(2,p3.getConsultas().size());
-            assertTrue(true);
-            daof.commitTransaction();        
+            assertEquals(2,p3.getConsultas().size());
             daof.endSession();
         } catch (IOException | PersistenceException ex) {
             if(daof!=null){
@@ -128,12 +128,11 @@ public class PacientePersistenceTest {
                 }
             }
             fail("Hubo un error al iniciar o leer y lanzo prueba 3: "+ex.getMessage());
-        }*/
-        assertTrue(true);
+        }
     }
     @Test
     public void AgregarPacienteNuevoDenuevoVariasConsultasALaBaseDeDatos(){
-        /*DaoFactory daof = null;
+        DaoFactory daof = null;
         try {
             assertTrue(true);
             InputStream input = null;
@@ -167,10 +166,8 @@ public class PacientePersistenceTest {
                     System.out.println("Hubo un error al cerrar y lanzo: "+ex1.getMessage());
                 }
             }
-            //assertEquals("No inserto los datos, revisar la base de datos",ex.getMessage());
-            assertTrue(true);
-        }*/
-        assertTrue(true);
+            assertEquals("No inserto los datos, revisar la base de datos",ex.getMessage());
+        }
     }
     
 }

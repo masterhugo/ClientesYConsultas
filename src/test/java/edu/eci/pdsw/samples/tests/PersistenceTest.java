@@ -74,11 +74,11 @@ public class PersistenceTest {
         SqlSession sqlss = sessionfact.openSession();
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        Paciente p = new Paciente(4, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+        Paciente p = new Paciente(6, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
         pmap.insertPaciente(p);
         
         sqlss.commit();
-        Paciente p3 = pmap.loadPacienteById(4, "CC");
+        Paciente p3 = pmap.loadPacienteById(6, "CC");
 
         assertEquals(0,p3.getConsultas().size());
         sqlss.close();
@@ -90,17 +90,17 @@ public class PersistenceTest {
         SqlSession sqlss = sessionfact.openSession();
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        Paciente p = new Paciente(2, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+        Paciente p = new Paciente(5, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
         Set<Consulta> cons = new HashSet<>();
         cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
         p.setConsultas(cons);
         pmap.insertPaciente(p);
         for(Consulta c: cons){
-            pmap.insertConsulta(c, 2, "CC");
+            pmap.insertConsulta(c, 5, "CC");
         }
         
         sqlss.commit();
-        Paciente p3 = pmap.loadPacienteById(2, "CC");
+        Paciente p3 = pmap.loadPacienteById(5, "CC");
 
         assertEquals(1,p3.getConsultas().size());
         sqlss.close();
@@ -112,18 +112,18 @@ public class PersistenceTest {
         SqlSession sqlss = sessionfact.openSession();
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        Paciente p = new Paciente(3, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+        Paciente p = new Paciente(7, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
         Set<Consulta> cons = new HashSet<>();
         cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
         cons.add(new Consulta(Date.valueOf("2001-05-05"), "Ya no"));
         p.setConsultas(cons);
         pmap.insertPaciente(p);
         for(Consulta c: cons){
-            pmap.insertConsulta(c, 3, "CC");
+            pmap.insertConsulta(c, 7, "CC");
         }
         
         sqlss.commit();
-        Paciente p3 = pmap.loadPacienteById(3, "CC");
+        Paciente p3 = pmap.loadPacienteById(7, "CC");
 
         assertEquals(2,p3.getConsultas().size());
         sqlss.close();
