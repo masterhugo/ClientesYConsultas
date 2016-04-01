@@ -18,7 +18,7 @@ import java.util.logging.*;
 public class ServiciosPacientesDAO extends ServiciosPacientes{
 
     public DaoFactory daof = null;
-    public ServiciosPacientesDAO() {
+    public ServiciosPacientesDAO(String propiedades) {
         InputStream input = null;
         try {
             input = getClass().getClassLoader().getResource("applicationconfig.properties").openStream();

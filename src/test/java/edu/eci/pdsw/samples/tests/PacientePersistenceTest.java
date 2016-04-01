@@ -49,7 +49,7 @@ public class PacientePersistenceTest {
             
 
             daof.commitTransaction();   
-            Paciente p3 = paciente.load(1, "CC");
+            Paciente p3 = paciente.load(143, "CC");
             daof.endSession();
             assertEquals(0,p3.getConsultas().size());
         } catch (IOException | PersistenceException ex) {

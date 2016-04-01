@@ -27,11 +27,11 @@ import java.util.*;
  */
 public abstract class ServiciosPacientes implements Serializable{
     
+    private static String propiedades = null;
+    private static ServiciosPacientes instance=new ServiciosPacientesDAO(propiedades);
     
-    private static ServiciosPacientes instance=new ServiciosPacientesDAO();
     
-    
-    protected ServiciosPacientes(){        
+    protected ServiciosPacientes(){
 
     }
     
