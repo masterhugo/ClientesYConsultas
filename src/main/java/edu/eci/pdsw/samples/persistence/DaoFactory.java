@@ -35,6 +35,7 @@ public abstract class DaoFactory {
         if (instance == null) {
             synchronized (DaoFactory.class) {
                 if (instance == null) {
+                    System.out.println("!!!!!!!!!!!!--------"+appProperties);
                     if (appProperties.get("dao").equals("mybatis")) {
                         instance = new MappersDaoFactory(appProperties);
                     } else if(appProperties.get("dao").equals("jdbc")){
