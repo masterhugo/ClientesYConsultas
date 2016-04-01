@@ -47,6 +47,7 @@ public class MappersDaoFactory extends DaoFactory {
             InputStream inputStream;
             //inputStream = getClass().getClassLoader().getResource(config).openStream();
             inputStream = Resources.getResourceAsStream(appProperties.getProperty("config"));
+            System.out.println("<<<<<<<<<<<-------"+appProperties);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         } catch (IOException ex) {
             System.out.println(ex.getMessage()+" "+ex.getCause());

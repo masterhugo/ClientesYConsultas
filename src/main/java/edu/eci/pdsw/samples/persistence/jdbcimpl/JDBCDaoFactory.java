@@ -46,7 +46,7 @@ public class JDBCDaoFactory extends DaoFactory {
             String driver=appProperties.getProperty("driver");
             String user=appProperties.getProperty("user");
             String pwd=appProperties.getProperty("pwd");
-                        
+            System.out.println(">>>>>>>>>>>"+appProperties);
         try {
             Class.forName(driver);
             Connection _con=DriverManager.getConnection(url,user,pwd);

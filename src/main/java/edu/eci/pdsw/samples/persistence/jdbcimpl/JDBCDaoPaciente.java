@@ -104,7 +104,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
                 ps.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw new PersistenceException("No inserto los datos, revisar la base de datos",ex);
+            throw new PersistenceException("No inserto los datos, revisar la base de datos"+ex.getMessage(),ex);
         }
         
 

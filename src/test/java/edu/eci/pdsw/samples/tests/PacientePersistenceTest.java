@@ -30,15 +30,13 @@ import static org.junit.Assert.*;
  * @author hcadavid
  */
 public class PacientePersistenceTest {
+    public static final InputStream input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+    public static final Properties properties=new Properties();
     
     @Test
     public void AgregarPacienteNuevoSinConsultasALaBaseDeDatos(){
         DaoFactory daof = null;
         try {
-            assertTrue(true);
-            InputStream input = null;
-            input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
-            Properties properties=new Properties();
             properties.load(input);
             
             daof=DaoFactory.getInstance(properties);
@@ -60,10 +58,6 @@ public class PacientePersistenceTest {
     public void AgregarPacienteNuevoUnaConsultaALaBaseDeDatos(){
         DaoFactory daof = null;
         try {
-            assertTrue(true);
-            InputStream input;
-            input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
-            Properties properties=new Properties();
             properties.load(input);
             
             daof=DaoFactory.getInstance(properties);
@@ -96,10 +90,6 @@ public class PacientePersistenceTest {
     public void AgregarPacienteNuevoMuchasConsultasALaBaseDeDatos(){
         DaoFactory daof = null;
         try {
-            assertTrue(true);
-            InputStream input = null;
-            input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
-            Properties properties=new Properties();
             properties.load(input);
             
             daof=DaoFactory.getInstance(properties);
@@ -134,10 +124,6 @@ public class PacientePersistenceTest {
     public void AgregarPacienteNuevoDenuevoVariasConsultasALaBaseDeDatos(){
         DaoFactory daof = null;
         try {
-            assertTrue(true);
-            InputStream input = null;
-            input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
-            Properties properties=new Properties();
             properties.load(input);
             
             daof=DaoFactory.getInstance(properties);

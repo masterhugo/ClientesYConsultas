@@ -45,6 +45,7 @@ public class PersistenceTest {
             InputStream inputStream;
             try {
                 inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
+                System.out.println("ASDASDASDASDAS"+inputStream);
                 //inputStream = PersistenceTest.class.getClassLoader().getResource("mybatis-config-h2.xml").openStream();
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
