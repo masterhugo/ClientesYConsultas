@@ -48,7 +48,7 @@ public class ConsultasTest {
       try {
           ServiciosPacientes sp = new ServiciosPacientesStub();
           String paramDateAsString = "1995-05-15";
-          sp.agregarConsultaAPaciente(1, "cc", new Consulta(Date.valueOf(paramDateAsString), "El paciente esta muerto"));
+          sp.agregarConsultaAPaciente(10, "cc", new Consulta(Date.valueOf(paramDateAsString), "El paciente esta muerto"));
           fail("No debio agregarlo");
       } catch (ExcepcionServiciosPacientes ex) {
           assertTrue(true);
