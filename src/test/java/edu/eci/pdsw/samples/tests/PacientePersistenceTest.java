@@ -45,7 +45,7 @@ public class PacientePersistenceTest {
             
             daof.beginSession();
             DaoPaciente paciente = daof.getDaoPaciente();
-            paciente.save(new Paciente(1, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15")));
+            paciente.save(new Paciente(143, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15")));
             
 
             daof.commitTransaction();   
@@ -70,7 +70,7 @@ public class PacientePersistenceTest {
             
             daof.beginSession();
             DaoPaciente paciente = daof.getDaoPaciente();
-            Paciente p = new Paciente(2, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+            Paciente p = new Paciente(214, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
             Set<Consulta> cons = new HashSet<>();
             cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
             p.setConsultas(cons);
@@ -106,7 +106,7 @@ public class PacientePersistenceTest {
             
             daof.beginSession();
             DaoPaciente paciente = daof.getDaoPaciente();
-            Paciente p = new Paciente(3, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
+            Paciente p = new Paciente(325, "CC", "Hugo Alvarez", Date.valueOf("1995-05-15"));
             Set<Consulta> cons = new HashSet<Consulta>();
             cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
             cons.add(new Consulta(Date.valueOf("2001-05-05"), "Ya no"));
@@ -146,7 +146,7 @@ public class PacientePersistenceTest {
             DaoPaciente paciente = daof.getDaoPaciente();
             int i = 0;
             Paciente p = null;
-            paciente.save(new Paciente(4, "CC", "Lucena", Date.valueOf("2001-01-01")));
+            paciente.save(new Paciente(411, "CC", "Lucena", Date.valueOf("2001-01-01")));
             p = new Paciente(4, "CC", "Lucena", Date.valueOf("2001-01-01"));
             Set<Consulta> cons = new HashSet<Consulta>();
             cons.add(new Consulta(Date.valueOf("2001-01-01"), "Gracias"));
