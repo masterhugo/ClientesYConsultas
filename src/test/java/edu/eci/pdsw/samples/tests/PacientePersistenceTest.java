@@ -20,7 +20,10 @@ package edu.eci.pdsw.samples.tests;
 import edu.eci.pdsw.samples.entities.*;
 import edu.eci.pdsw.samples.persistence.*;
 import java.io.*;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -30,15 +33,13 @@ import static org.junit.Assert.*;
  * @author hcadavid
  */
 public class PacientePersistenceTest {
-    public static final InputStream input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
-    public static final Properties properties=new Properties();
-    
+    public final InputStream input = ClassLoader.getSystemResourceAsStream("pruebas_test.properties");
+    public final Properties properties=new Properties();
     @Test
-    public void AgregarPacienteNuevoSinConsultasALaBaseDeDatos(){
+    public void AgregarPacienteNuevoSinConsultasALaBaseDeDatos() throws IOException{
         DaoFactory daof = null;
         try {
             properties.load(input);
-            
             daof=DaoFactory.getInstance(properties);
             
             daof.beginSession();
@@ -50,12 +51,12 @@ public class PacientePersistenceTest {
             Paciente p3 = paciente.load(143, "CC");
             daof.endSession();
             assertEquals(0,p3.getConsultas().size());
-        } catch (IOException | PersistenceException ex) {
+        } catch (PersistenceException ex) {
             fail("Hubo un error al iniciar o leer y lanzo prueba 1: "+ex.getMessage());
         }
     }
     @Test
-    public void AgregarPacienteNuevoUnaConsultaALaBaseDeDatos(){
+    public void AgregarPacienteNuevoUnaConsultaALaBaseDeDatos() throws IOException{
         DaoFactory daof = null;
         try {
             properties.load(input);
@@ -74,7 +75,7 @@ public class PacientePersistenceTest {
             Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
             assertEquals(1,p3.getConsultas().size());
             daof.endSession();
-        } catch (IOException | PersistenceException ex) {
+        } catch ( PersistenceException ex) {
             if(daof!=null){
                 try {
                     daof.endSession();
@@ -87,7 +88,7 @@ public class PacientePersistenceTest {
         
     }
     @Test
-    public void AgregarPacienteNuevoMuchasConsultasALaBaseDeDatos(){
+    public void AgregarPacienteNuevoMuchasConsultasALaBaseDeDatos() throws IOException{
         DaoFactory daof = null;
         try {
             properties.load(input);
@@ -109,7 +110,7 @@ public class PacientePersistenceTest {
             Paciente p3 = paciente.load(p.getId(), p.getTipo_id());
             assertEquals(2,p3.getConsultas().size());
             daof.endSession();
-        } catch (IOException | PersistenceException ex) {
+        } catch (PersistenceException ex) {
             if(daof!=null){
                 try {
                     daof.endSession();
@@ -121,7 +122,7 @@ public class PacientePersistenceTest {
         }
     }
     @Test
-    public void AgregarPacienteNuevoDenuevoVariasConsultasALaBaseDeDatos(){
+    public void AgregarPacienteNuevoDenuevoVariasConsultasALaBaseDeDatos() throws IOException{
         DaoFactory daof = null;
         try {
             properties.load(input);
@@ -144,7 +145,7 @@ public class PacientePersistenceTest {
             assertTrue(true);
             daof.commitTransaction();        
             daof.endSession();
-        } catch (IOException | PersistenceException ex) {
+        } catch (PersistenceException ex) {
             if(daof!=null){
                 try {
                     daof.endSession();
