@@ -50,8 +50,10 @@ public interface PacienteMapper {
     public void insertConsulta(@Param("consulta")Consulta con,@Param("idpaciente")int id,@Param("tipoidapaciente")String tipoid);
      
     /**
-     * Carga todos los pacientes
-     * @return lista de pacientes
+     * Cargar un paciente por ID
+     * @param id del paciente
+     * @param tipoid tipo de id
+     * @return 
      */
-    public List<Paciente> loadAll();
+    public List<Paciente> loadPacientes();
 }

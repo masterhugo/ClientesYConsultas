@@ -29,7 +29,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.ibatis.session.SqlSession;
@@ -68,16 +67,14 @@ public class MappersDaoPaciente implements DaoPaciente {
     public void update(Paciente p) throws PersistenceException {
         if(mp.loadPacienteById(p.getId(), p.getTipo_id())==null) throw new PersistenceException("No existe el paciente");
         Paciente p3 = mp.loadPacienteById(p.getId(), p.getTipo_id());
-        for (Consulta col : p.getConsultas()) {
-            if(col.getId()==-1){
-                mp.insertConsulta(col, p.getId(), p.getTipo_id());
-            }
+        for (Consulta col : p3.getConsultas()) {
+            
         }
     }
 
     @Override
     public ArrayList<Paciente> loadAll() throws PersistenceException {
-        return (ArrayList<Paciente>) mp.loadAll();
+        return new ArrayList<>(mp.loadPacientes());
     }
     
 }

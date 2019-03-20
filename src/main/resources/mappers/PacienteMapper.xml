@@ -3,35 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="edu.eci.pdsw.samples.persistence.mybatis.mappers.PacienteMapper">
+<mapper namespace="edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper">
 
-    <resultMap type='Paciente' id='PacienteResult'>
-        <result property='id' column='id'/>
-        <result property='tipo_id' column='tipo_id'/>
-        <result property='nombre' column='nombre'/>
-        <result property='fechaNacimiento' column='fecha_nacimiento'/>
-        <collection property='consultas' ofType='Consulta' resultMap="ConsultaResult" columnPrefix="Consulta_"/>
-    </resultMap>
-    <resultMap type='Consulta' id='ConsultaResult'>
-        <id property='id' column='ids'/>
-        <result property='fechayHora' column='fechas'/>
-        <result property='resumen' column='resumenes'/>        
-    </resultMap>
+<resultMap type='Paciente' id='PacienteResult'>
+    <result property='id' column='id'/>
+    <result property='tipo_id' column='tipo_id'/>
+    <result property='nombre' column='nombre'/>
+    <result property='fechaNacimiento' column='fecha_nacimiento'/>
+    <collection property='consultas' ofType='Consulta' resultMap="ConsultaResult" columnPrefix="Consulta_"/>
+</resultMap>
+<resultMap type='Consulta' id='ConsultaResult'>
+    <id property='id' column='ids'/>
+    <result property='fechayHora' column='fechas'/>
+    <result property='resumen' column='resumenes'/>        
+</resultMap>
 
-    <select id='loadPacienteById' parameterType='map' resultMap='PacienteResult'>
-        select pac.id, pac.tipo_id, pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as Consulta_ids, con.fecha_y_hora as Consulta_fechas, con.resumen as Consulta_resumenes
-        from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id 
-        where (con.PACIENTES_id is null or con.PACIENTES_tipo_id is null or con.PACIENTES_id is not null) and pac.id=#{idpaciente} and pac.tipo_id=#{tipoidpaciente}
-    </select>
-    <insert id="insertPaciente">
-        insert into PACIENTES(id,tipo_id,nombre,fecha_nacimiento) values(#{paciente.id},#{paciente.tipo_id},#{paciente.nombre},#{paciente.fechaNacimiento})
-    </insert>
-
-    <insert id="insertConsulta" useGeneratedKeys="true" keyProperty="consulta.id">
-        insert into CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(#{consulta.fechayHora},#{consulta.resumen},#{idpaciente},#{tipoidapaciente})
-    </insert>
-    <select id='loadAll' resultMap='PacienteResult'>
-        select pac.id, pac.tipo_id, pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as Consulta_ids, con.fecha_y_hora as Consulta_fechas, con.resumen as Consulta_resumenes
-        from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id
-    </select>
+<select id='loadPacienteById' parameterType='map' resultMap='PacienteResult'>
+    select pac.id, pac.tipo_id, pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as Consulta_ids, con.fecha_y_hora as Consulta_fechas, con.resumen as Consulta_resumenes
+    from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id 
+    where (con.PACIENTES_id is null or con.PACIENTES_tipo_id is null or con.PACIENTES_id is not null) and pac.id=#{idpaciente} and pac.tipo_id=#{tipoidpaciente}
+</select>
+<select id='loadPacientes' parameterType='map' resultMap='PacienteResult'>
+    select pac.id, pac.tipo_id, pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as Consulta_ids, con.fecha_y_hora as Consulta_fechas, con.resumen as Consulta_resumenes
+    from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id 
+    
+</select>
+<insert id="insertPaciente">
+    insert into PACIENTES(id,tipo_id,nombre,fecha_nacimiento) values(#{paciente.id},#{paciente.tipo_id},#{paciente.nombre},#{paciente.fechaNacimiento})
+</insert>
+   
+<insert id="insertConsulta" useGeneratedKeys="true" keyProperty="consulta.id">
+    insert into CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(#{consulta.fechayHora},#{consulta.resumen},#{idpaciente},#{tipoidapaciente})
+</insert>
 </mapper>
